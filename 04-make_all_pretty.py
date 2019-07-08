@@ -65,7 +65,8 @@ app.layout = html.Div(children=[
 
         html.Div(children=[
             html.Div(children=[
-                html.H5(children='Follower Count'),
+                html.H5(children='Follower Count',
+                     style={'backgroundColor': colors['dim_gray'], 'color':colors['light_blue']}),
                 dcc.RadioItems(
                     id='follower_count_graph_data',
                     options=[
@@ -81,6 +82,21 @@ app.layout = html.Div(children=[
 
             dcc.Graph(
                 id='follower_count_graph',
+                config={
+        	      'modeBarButtonsToRemove': [
+                	'sendDataToCloud',
+        	        'pan2d',
+                	'zoomIn2d',
+        	        'zoomOut2d',
+        	        'autoScale2d',
+        	        'resetScale2d',
+        	        'hoverCompareCartesian',
+        	        'hoverClosestCartesian',
+        	        'toggleSpikelines'
+                      ],
+                	'displayModeBar': True,
+                	'displaylogo': False
+                }
             )
         ], className='ten columns', style={'margin-bottom':'10'})
     ], className='container')
