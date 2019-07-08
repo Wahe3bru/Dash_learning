@@ -6,13 +6,14 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output # new - needed for Callbacks
 
+from pathlib import Path
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 
 ###---   Data Wrangling   ---###
-Follower_count_df = pd.read_csv('data\Follower_count_gsheet.csv')
+Follower_count_df = pd.read_csv('data/Follower_count_gsheet.csv')
 
 def correct_num_data(x):
     """turn (1,234 and 11.7K) strings into integer values
@@ -43,7 +44,6 @@ colors = {
 
 # possibly programatically change text
 intro_text = '''
-#### Intro text
 So I will be going way over the top with customizing nearly everything that i
 can or think i will need to in terms of styling.
 '''
@@ -51,22 +51,26 @@ can or think i will need to in terms of styling.
 ####---   Layout   ---###
 app.layout = html.Div(children=[
     html.Div(className='fill', children=[
-        html.Img(src='/assets/Instatrakkr.png')                      # add image
+        html.Img(src='/assets/logo.png')                     # add image
     ]),
 
         html.Div(children=[
-            html.H1(children='InstaTrakr'),
             html.P(children='A Work in progress...')
-        ], className='row'),
+        ], className='row', style={'float':'right'}),
+
+        html.Hr([]),
 
         html.Div(children=[
+        html.H4(children='Introduction',
+            style={'backgroundColor': colors['pistachio'], 'color':colors['mel_yellow']}
+        ),
         dcc.Markdown(children=intro_text)
-        ]),
+        ], className='row'),
 
         html.Div(children=[
             html.Div(children=[
                 html.H5(children='Follower Count',
-                     style={'backgroundColor': colors['dim_gray'], 'color':colors['light_blue']}),
+                     style={'backgroundColor': colors['pistachio'], 'color':colors['lightr_blue']}),
                 dcc.Tabs(id='tabs' ,value='tab-raw', children=[
                     dcc.Tab(label='Raw Numbers', value='tab-raw'),
                     dcc.Tab(label='Difference', value='tab-diff'),
@@ -126,7 +130,7 @@ def update_follower_count_graph(selected_data):
     return {
         'data': traces,
         'layout': go.Layout(
-            title='Follower Count',
+            # title='Follower Count',
             xaxis = dict(
                 title='Date',
                 titlefont=dict(
