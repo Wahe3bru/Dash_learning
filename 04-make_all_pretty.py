@@ -44,22 +44,16 @@ colors = {
 # possibly programatically change text
 intro_text = '''
 #### Intro text
-This would be an basic explanation of the dashboard.
-I would like to include three blocks with:
-
-- Follower counts
-- Following counts
-- Posts
-
-to date, like KPIs. But it'll be switched out for better ones.
+So I will be going way over the top with customizing nearly everything that i
+can or think i will need to in terms of styling.
 '''
 
 ####---   Layout   ---###
 app.layout = html.Div(children=[
-    html.Div(children=[
-        html.Img(id='headr', src='/assets/Instatrakkr.png')                      # add image
+    html.Div(style={'width':'100%', 'align':'center'}, children=[
+        html.Img(src='/assets/Instatrakkr.png')                      # add image
     ]),
-    html.Div([
+
         html.Div(children=[
             html.H1(children='InstaTrakr'),
             html.P(children='A Work in progress...')
@@ -86,24 +80,11 @@ app.layout = html.Div(children=[
 
 
             dcc.Graph(
-            id='follower_count_graph',
-            figure={
-                'data': [
-                    go.Scatter(
-                        x=Follower_count_df.index,
-                        y=Follower_count_df[i],
-                        mode='markers+lines',
-                        name=i,
-                    ) for i in Follower_count_df.columns
-                ],
-                'layout': go.Layout(
-                    title='Follower Count'
-                )
-            }
+                id='follower_count_graph',
             )
-        ], className='card ten columns')
+        ], className='ten columns', style={'margin-bottom':'10'})
     ], className='container')
-], className='container-fluid')
+
 ###---   Callbacks   ---###
 @app.callback(
     Output('follower_count_graph', 'figure'),
@@ -133,7 +114,16 @@ def update_follower_count_graph(selected_data):
     return {
         'data': traces,
         'layout': go.Layout(
-            title='Follower Count'
+            title='Follower Count',
+            xaxis = dict(
+                title='Date',
+                titlefont=dict(
+                    family='Helvetica, monospace',
+                    size=20,
+                    color=colors['light_blue']
+                ),
+                tickangle=45,
+            )
         )
     }
 
