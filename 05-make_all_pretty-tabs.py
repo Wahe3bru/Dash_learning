@@ -6,11 +6,9 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output # new - needed for Callbacks
 
-from pathlib import Path
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
 
 ###---   Data Wrangling   ---###
 Follower_count_df = pd.read_csv('data/Follower_count_gsheet.csv')
