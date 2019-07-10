@@ -49,15 +49,15 @@ def get_header():
 
 
 def get_menu():
-    menu = html.Div([
-
-    dcc.Link('overview   ', href='/overview', className="tab first"),
-    dcc.Link('followers   ', href='/followers', className="tab"),
-    dcc.Link('following   ', href='/following', className="tab"),
-    dcc.Link('posts   ', href='/posts', className="tab"),
-    dcc.Link('analysis   ', href='/analysis', className="tab"),
-
-    ], className="row")
+    menu = html.Div([    # Enclosed div to center menu
+        html.Div([       # style "display" to center entire menu
+            dcc.Link('overview   ', href='/overview', className="tab first"),
+            dcc.Link('followers   ', href='/followers', className="tab"),
+            dcc.Link('following   ', href='/following', className="tab"),
+            dcc.Link('posts   ', href='/posts', className="tab"),
+            dcc.Link('analysis   ', href='/analysis', className="tab"),
+        ], style={"display":"inline-block"}),
+    ], className="row", style={'text-align': 'center'})
     return menu
 
 ###    ---page layout---   ###
