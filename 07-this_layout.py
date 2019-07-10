@@ -6,10 +6,13 @@ import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output # new - needed for Callbacks
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css',
-                        'https://codepen.io/lindsayrichman/pen/MqYegV.css']
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+external_css = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css",
+                "https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
+                "//fonts.googleapis.com/css?family=Raleway:400,300,600",
+                #"https://codepen.io/lindsayrichman/pen/MqYegV.css",
+                 "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                ]
+app = dash.Dash(__name__, external_stylesheets=external_css)
 
 # reusable dash_core_components
 def print_button():
@@ -58,6 +61,7 @@ def get_menu():
     return menu
 
 ###    ---page layout---   ###
+# page1
 overview = html.Div([
 
     print_button(),
@@ -74,13 +78,90 @@ overview = html.Div([
         html.Div([
             html.H4(children='Testing')
         ])
-    ])
-])
+    ], className="subpage")
+], className="page")
 
-followers = html.Div([])
-following = html.Div([])
-posts = html.Div([])
-analysis = html.Div([])
+# Page2
+followers = html.Div([
+
+    print_button(),
+
+    html.Div([
+
+        # header
+        get_logo(),
+        get_header(),
+        html.Br([]),
+        get_menu(),
+
+        # Row 3
+        html.Div([
+            html.H4(children='Followers')
+        ])
+    ], className="subpage")
+], className="page")
+
+#Page3
+following = html.Div([
+
+    print_button(),
+
+    html.Div([
+
+        # header
+        get_logo(),
+        get_header(),
+        html.Br([]),
+        get_menu(),
+
+        # Row 3
+        html.Div([
+            html.H4(children='Following')
+        ])
+    ], className="subpage")
+], className="page")
+
+# Page4
+posts = html.Div([
+
+    print_button(),
+
+    html.Div([
+
+        # header
+        get_logo(),
+        get_header(),
+        html.Br([]),
+        get_menu(),
+
+        # Row 3
+        html.Div([
+            html.H4(children='Post')
+        ])
+    ], className="subpage")
+], className="page")
+
+# Page5
+analysis = html.Div([
+
+    print_button(),
+
+    html.Div([
+
+        # header
+        get_logo(),
+        get_header(),
+        html.Br([]),
+        get_menu(),
+
+        # Row 3
+        html.Div([
+            html.H4(children='analysis')
+        ])
+    ], className="subpage")
+], className="page")
+
+
 noPage = html.Div([  # 404
 
     html.P(["404 Page not found"])
@@ -114,21 +195,11 @@ def display_page(pathname):
         noPage
 
 
-external_css = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css",
-                "https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
-                "//fonts.googleapis.com/css?family=Raleway:400,300,600",
-                "https://codepen.io/lindsayrichman/pen/MqYegV.css",
-                 "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-                ]
-
-for css in external_css:
-    app.css.append_css({"external_url": css})
-
 external_js = ["https://code.jquery.com/jquery-3.2.1.min.js",
                "https://codepen.io/bcd/pen/YaXojL.js"]
 
 for js in external_js:
-app.scripts.append_script({"external_url": js})
+    app.scripts.append_script({"external_url": js})
 
 
 if __name__ == '__main__':
