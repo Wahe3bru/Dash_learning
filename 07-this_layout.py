@@ -10,7 +10,7 @@ external_css = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normaliz
                 "https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
                 "//fonts.googleapis.com/css?family=Raleway:400,300,600",
                 #"https://codepen.io/lindsayrichman/pen/MqYegV.css",
-                 "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                 "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
                 ]
 app = dash.Dash(__name__, external_stylesheets=external_css)
 app.config['suppress_callback_exceptions']=True
@@ -97,14 +97,14 @@ overview = html.Div([
 
         # Row 3
         html.Div([
-            html.H4(children='Introduction', className="gs-header gs-text-header padded"),
+            html.H6(children='Introduction', className="gs-header gs-text-header padded"),
             html.P(children= "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam sint aliquid dignissimos placeat iste vero atque iusto iure nulla dolore. Odio libero doloremque repellat neque quibusdam deserunt aut necessitatibus culpa."),
             html.P(children= "Consectetur adipisicing elit. Quam sint aliquid dignissimos placeat iste vero atque iusto iure nulla dolore. Odio libero doloremque repellat neque quibusdam deserunt aut necessitatibus culpa."),
         ], className="row ten columns"),
 
         # Row 4
         html.Div([
-            html.H4(children='Follower Counts', className="gs-header gs-text-header padded"),
+            html.H6(children='Follower Counts', className="gs-header gs-text-header padded"),
             dcc.Tabs(id='tabs' ,value='tab-raw', children=[
                 dcc.Tab(label='Raw Numbers', value='tab-raw'),
                 dcc.Tab(label='Difference', value='tab-diff'),
@@ -113,13 +113,13 @@ overview = html.Div([
             html.Div([
                 dcc.Graph(
                     id='follower_count_graph',
-                    style={'height':'45%', 'width':'90%'},
+                    style={'height':'450', 'width':'720'},
                     config={
                         'displayModeBar': False,
                         'displaylogo': False
                     }
                 )
-            ]),
+            ], className="twelve columns"),
 
 
         ], className="row twelve columns"),
@@ -280,6 +280,7 @@ def update_follower_count_graph(selected_data):
     }
 
 ###---   End Callbacks   ---###
+
 external_js = ["https://code.jquery.com/jquery-3.2.1.min.js",
                "https://codepen.io/bcd/pen/YaXojL.js"]
 
