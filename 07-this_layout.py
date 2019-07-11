@@ -82,7 +82,7 @@ def get_menu():
     return menu
 
 ###    ---page layout---   ###
-# page1
+# Page1
 overview = html.Div([
 
     print_button(),
@@ -98,6 +98,40 @@ overview = html.Div([
         # Row 3
         html.Div([
             html.H6(children='Introduction', className="gs-header gs-text-header padded"),
+            html.P(children='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+        ], className="row ten columns"),
+
+        # Row 4
+        html.Div([
+            html.Div([
+                html.H6(children='How to use this report', className="gs-header gs-text-header padded"),
+                html.P(children='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+            ], className="six columns"),
+            html.Div([
+                html.H6(children='Another section here', className="gs-header gs-text-header padded"),
+                html.P(children='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+            ], className="six columns"),
+        ], className="row twelve columns"),
+
+    ], className="subpage")
+], className="page")
+
+# page2
+followers = html.Div([
+
+    print_button(),
+
+    html.Div([
+
+        # header
+        get_logo(),
+        get_header(),
+        html.Br([]),
+        get_menu(),
+
+        # Row 3
+        html.Div([
+            html.H6(children='Summary', className="gs-header gs-text-header padded"),
             html.P(children= "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam sint aliquid dignissimos placeat iste vero atque iusto iure nulla dolore. Odio libero doloremque repellat neque quibusdam deserunt aut necessitatibus culpa."),
             html.P(children= "Consectetur adipisicing elit. Quam sint aliquid dignissimos placeat iste vero atque iusto iure nulla dolore. Odio libero doloremque repellat neque quibusdam deserunt aut necessitatibus culpa."),
         ], className="row ten columns"),
@@ -127,25 +161,6 @@ overview = html.Div([
     ], className="subpage")
 ], className="page")
 
-# Page2
-followers = html.Div([
-
-    print_button(),
-
-    html.Div([
-
-        # header
-        get_logo(),
-        get_header(),
-        html.Br([]),
-        get_menu(),
-
-        # Row 3
-        html.Div([
-            html.H4(children='Followers')
-        ])
-    ], className="subpage")
-], className="page")
 
 #Page3
 following = html.Div([
