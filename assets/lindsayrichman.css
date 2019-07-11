@@ -57,7 +57,7 @@ p{ margin-bottom: 1rem }
 
 .iframe{ border: none; }
 
-..gs-header{ color: white !important; -webkit-print-color-adjust: exact; }
+.gs-header{ color: white !important; -webkit-print-color-adjust: exact; }
 
 .gs-text-header{ background: #5AB1BB !important; -webkit-print-color-adjust: exact;
              border-radius: 10px  }

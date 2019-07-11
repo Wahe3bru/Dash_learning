@@ -13,27 +13,6 @@ external_css = ["https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normaliz
                  "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
                 ]
 app = dash.Dash(__name__, external_stylesheets=external_css)
-app.config['suppress_callback_exceptions']=True
-
-###---   Data Wrangling   ---###
-Follower_count_df = pd.read_csv('data/Follower_count_gsheet.csv')
-
-def correct_num_data(x):
-    """turn (1,234 and 11.7K) strings into integer values
-    eg 1,234 -> 1234 and 11.7K -> 11700
-    """
-    y = str(x)
-    if '.' in y:
-        x_split = y.split('.')
-        x_split[0] = int(x_split[0])*1000
-        x_split[1] = x_split[1].replace('k', '00')
-        y = x_split[0] + int(x_split[1])
-    else:
-        y = y.replace(',', '').replace('k', '000')
-    return int(y)
-
-Follower_count_df = Follower_count_df.set_index('Date')
-Follower_count_df = Follower_count_df.applymap(correct_num_data)
 
 # reusable dash_core_components
 def print_button():
@@ -100,29 +79,7 @@ overview = html.Div([
             html.H4(children='Introduction', className="gs-header gs-text-header padded"),
             html.P(children= "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam sint aliquid dignissimos placeat iste vero atque iusto iure nulla dolore. Odio libero doloremque repellat neque quibusdam deserunt aut necessitatibus culpa."),
             html.P(children= "Consectetur adipisicing elit. Quam sint aliquid dignissimos placeat iste vero atque iusto iure nulla dolore. Odio libero doloremque repellat neque quibusdam deserunt aut necessitatibus culpa."),
-        ], className="row ten columns"),
-
-        # Row 4
-        html.Div([
-            html.H4(children='Follower Counts', className="gs-header gs-text-header padded"),
-            dcc.Tabs(id='tabs' ,value='tab-raw', children=[
-                dcc.Tab(label='Raw Numbers', value='tab-raw'),
-                dcc.Tab(label='Difference', value='tab-diff'),
-                dcc.Tab(label='Percentage Change', value='tab-perc'),
-            ], className="custom-tabs-container custom-tab custom-tabs custom-tab--selected "),
-            html.Div([
-                dcc.Graph(
-                    id='follower_count_graph',
-                    style={'height':'45%', 'width':'90%'},
-                    config={
-                        'displayModeBar': False,
-                        'displaylogo': False
-                    }
-                )
-            ]),
-
-
-        ], className="row twelve columns"),
+        ], className="ten columns")
 
     ], className="subpage")
 ], className="page")
@@ -241,45 +198,6 @@ def display_page(pathname):
         noPage
 
 
-@app.callback(
-    Output('follower_count_graph', 'figure'),
-    [Input('tabs', 'value')])
-def update_follower_count_graph(selected_data):
-    ''' returns plot data based on selection
-    '''
-    # calc Data based on radio
-    if selected_data == 'tab-diff':
-        df = Follower_count_df.diff()
-    elif selected_data == 'tab-perc':
-        df = Follower_count_df.pct_change()
-    else:
-        df = Follower_count_df
-
-    # prep data for return
-    traces = []
-    for i in df.columns:
-        traces.append(
-            go.Scatter(
-                x=df.index,
-                y=df[i],
-                mode='markers+lines',
-                name=i,
-            )
-        )
-    return {
-        'data': traces,
-        'layout': go.Layout(
-            autosize = True,
-            height = 400,
-            width = 725,
-            # title='Follower Count',
-            xaxis = dict(
-                tickangle=45,
-            ),
-        )
-    }
-
-###---   End Callbacks   ---###
 external_js = ["https://code.jquery.com/jquery-3.2.1.min.js",
                "https://codepen.io/bcd/pen/YaXojL.js"]
 
