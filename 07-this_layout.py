@@ -148,7 +148,7 @@ followers = html.Div([
         # Row 4
         html.Div([
             html.H6(children='Follower Counts', className="gs-header gs-text-header padded"),
-            dcc.Tabs(id='tabs-followers' ,value='tab-raw', children=[
+            dcc.Tabs(id='tabs-followers' ,value='tab-perc', children=[
                 dcc.Tab(label='Raw Numbers', value='tab-raw'),
                 dcc.Tab(label='Difference', value='tab-diff'),
                 dcc.Tab(label='Percentage Change', value='tab-perc'),
@@ -194,7 +194,7 @@ following = html.Div([
         # Row 4
         html.Div([
             html.H6(children='Folowing Counts', className="gs-header gs-text-header padded"),
-            dcc.Tabs(id='tabs-following', value='tab-raw', children=[
+            dcc.Tabs(id='tabs-following', value='tab-diff', children=[
                 dcc.Tab(label='Raw Numbers', value='tab-raw'),
                 dcc.Tab(label='Difference', value='tab-diff'),
                 dcc.Tab(label='Percentage Change', value='tab-perc'),
@@ -280,9 +280,14 @@ analysis = html.Div([
 
 noPage = html.Div([  # 404
 
-    html.P(["404 Page not found"])
+    get_logo(),
+    get_header(),
+    html.Br([]),
+    get_menu(),
+    html.H1(["404 Page not found"]),
 
     ], className="no-page")
+
 ###   ---App Layout---   ###
 app.layout = html.Div([
 
@@ -308,7 +313,7 @@ def display_page(pathname):
     elif pathname == '/full-view':
         return overview, followers, following, posts, analysis
     else:
-        noPage
+        return noPage
 
 
 @app.callback(
